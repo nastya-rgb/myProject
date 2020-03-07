@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Flowers_Shop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        .side {
+            background-color: white;
+        }
+
+        .htext {
+            font-family: Castellar;
+            text-shadow:6px 5px 6px black;
+            margin-top: 10px;
+            font-size: 60px
+        }
+
+        
+
+        a {
+            text-decoration: none;
+            font-family: Castellar;
+            color: black;
+            text-align: center
+        }
+
+            a:hover {
+                text-decoration-line: none;
+                text-shadow: 1px 3px 3px gray;
+                color: gray
+            }
+
+        .mainfo {
+            display: flex;
+            justify-content: space-between
+        }
+
+        .mainbo {
+            font-size: 20px
+        }
+
+        .fon {
+            background-image: url('newfolder/1ss.png');
+            background-size: auto;
+            background-repeat: no-repeat;
+            background-position:top;
+            
+        }
+
+        span {
+            font-family: 'Tempus Sans ITC'
+        }
+
+        .fl {
+            width: 160px;
+            padding-top: 30px;
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class=" container">
+        <header>
+            <div class="row">
+                <div class=" col-sm-1 side"></div>
+                <div class="col-sm-10 main">
+                    <div style="display:flex; justify-content:space-between;">
+                        <div>
+
+                            <a href="#"><h3 class="fl" style="font-family:Vivaldi;">Design </h3></a>
+                            <h1 class="htext">STUDIO</h1>
+
+                        </div>
+                        <div style="position:relative;">
+                            <img class="fl" src="~/NewFolder/clo.png" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-1 side"></div>
+            </div>
+        </header>
+        <div class="fon">
+            <div class="row">
+
+                <div class=" col-sm-1 side"></div>
+                <div class="col-sm-10 mainbo">
+                    <hr style="box-shadow: 3px 3px 3px gray">
+                    <a style="margin-right:10px" href="@Url.Action("Muse", "Home")">muse</a>
+                    <a style="margin-right: 10px" href="@Url.Action("Index", "Home")">my story</a>
+                    <a href="/Home/Music">music</a>
+
+                    <div>
+                        @RenderBody()
+                    </div>
+
+                </div>
+                <div class="col-sm-1 side"></div>
+
+            </div>
+            <hr>
+        </div>
+
+        <footer>
+            <div class=" row">
+                <div class=" col-sm-1 side"></div>
+                <div class="col-sm-10 mainfo">
+                    <span><b>Phone: 8(777) 079 73-58</b></span>
+                    <span><b>  Address: st. Almaty 11</b></span>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                selectFile: '',
+                url: '',
+                musics: []
+            },
+            methods: {
+                addMusic() {
+                    this.musics.push(1);
+                },
+                selectFile(event) {
+                    this.selectFile = event.target.files[0];
+                    this.url = URL.createObjectURL(this.selectFile);
+                    document.getElementById("myMusic").load();
+
+                }
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

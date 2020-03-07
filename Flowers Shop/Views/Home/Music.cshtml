@@ -1,0 +1,12 @@
+﻿<div id="app">
+    <button v-on:click="addMusic();">Добавить музыку</button>
+    <div id="form">
+        <div v-for="m in musics">
+            <input type="file" v-on:change="selectFile/" />
+            <audio id="myMusic" controls>
+                <source v-bind:src="url" type="audio/mp3" />
+            </audio>
+        </div>
+
+    </div>
+</div>

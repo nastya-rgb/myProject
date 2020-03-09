@@ -13,7 +13,20 @@
             transition: 0.5s;
             border-radius: 11px
         }
-
+        .btstyk{
+            border:none;
+            background-color:white
+        }
+            .btstyk:hover {
+                background: linear-gradient(45deg,gray,white);
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                transition: 0.5s;
+                border-radius: 11px
+            }
+            .btsty:focus{
+                outline:none
+            }
+       
 </style>
 
 <button class="btsty" data-toggle="modal" data-target="#myModal">
@@ -33,13 +46,15 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div id="app">
-                    <button v-on:click="addMusic() ;"><i class="fas fa-plus"></i></button>
+                    <button v-on:click="addMusic() ;" class="btstyk"><i class="fas fa-plus"></i>Еще</button>
                     <div id="form">
                         <div v-for="m in musics">
-                            <input type="file" v-on:change="selectFile" />
-                            <audio id="myMusic" controls>
-                                <source v-bind:src="url" type="audio/mp3" />
-                            </audio>
+                            
+                                <input type="file"  v-on:change="selectFile" />
+                                <audio id="myMusic" controls>
+                                    <source v-bind:src="url" type="audio/mp3" />
+                                </audio>
+                            
                         </div>
 
                     </div>

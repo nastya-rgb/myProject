@@ -23,6 +23,11 @@
     <Page Include="Views\Home\Muse.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\font\" />
+    <Folder Include="wwwroot\Music\" />
+  </ItemGroup>
+
 
 
 </Project>

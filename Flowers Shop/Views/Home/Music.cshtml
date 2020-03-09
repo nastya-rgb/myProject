@@ -1,73 +1,141 @@
-﻿<link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
+﻿
 <style>
-    .btsty{
-        color:black;
-        border:none;
-        background-color:white;
-        margin-top:50px
+	.btsty {
+		color: black;
+		border: none;
+		background-color: white;
+		margin-top: 50px
+	}
 
-    }
-        .btsty:hover {
-           background: linear-gradient(45deg,gray  ,white) ;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            transition: 0.5s;
-            border-radius: 11px
-        }
-        .btstyk{
-            border:none;
-            background-color:white
-        }
-            .btstyk:hover {
-                background: linear-gradient(45deg,gray,white);
-                box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                transition: 0.5s;
-                border-radius: 11px
-            }
-            .btsty:focus{
-                outline:none
-            }
-       
+		.btsty:hover {
+			background: linear-gradient(45deg,gray,white);
+			box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			transition: 0.5s;
+			border-radius: 11px
+		}
+
+	.btstyk {
+		border: none;
+		background-color: white
+	}
+
+		.btstyk:hover {
+			background: linear-gradient(45deg,gray,white);
+			box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			transition: 0.5s;
+			border-radius: 11px
+		}
+
+	.btsty:focus {
+		outline: none
+	}
+
+	#form {
+		margin: 15px 0;
+	}
 </style>
+<div id="app">
+	<button class="btsty" data-toggle="modal" data-target="#myModal">
+		<i class="fas fa-feather-alt"> </i> Добавить музыку
+	</button>
 
-<button class="btsty" data-toggle="modal" data-target="#myModal">
-    <i class="fas fa-feather-alt"> </i> Добавить музыку
-</button>
+	<div v-for="m in dbMusic">
+		<p>{{m.name}}</p>
+		<audio id="myMusic" controls style="width:100%;">
+			<source v-bind:src="m.filePath" type="audio/mp3" />
+		</audio>
+	</div>
 
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Добавить еще</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Добавить еще</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div id="app">
-                    <button v-on:click="addMusic() ;" class="btstyk"><i class="fas fa-plus"></i>Еще</button>
-                    <div id="form">
-                        <div v-for="m in musics">
-                            
-                                <input type="file"  v-on:change="selectFile" />
-                                <audio id="myMusic" controls>
-                                    <source v-bind:src="url" type="audio/mp3" />
-                                </audio>
-                            
-                        </div>
+				<!-- Modal body -->
+				<div class="modal-body">
 
-                    </div>
-                </div>
-            </div>
+					<button v-on:click="addMusic() ;" class="btstyk"><i class="fas fa-plus"></i> Добавить</button>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
+					<form id="form" method="post" action="/Home/Music" enctype="multipart/form-data">
+						<div v-for="(m,ind) in musics">
 
-        </div>
-    </div>
+							<input v-bind:id="'f'+ind" type="file" style="display: none;" v-bind:name="m.name" v-on:change="selectFile" />
+							<h4>{{ind+1}} трек </h4>
+							<div style="margin:10px;">
+								<input type="button" v-on:click="clickFile('f'+ind)" class="btn btn-dark" value="Обзор..."><input v-bind:id="'tf'+ind" type="text" />
+							</div>
+
+							<audio id="myMusic" controls>
+								<source v-bind:src="url" type="audio/mp3" />
+							</audio>
+
+						</div>
+
+					</form>
+
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" v-on:click="saveFiles()" class="btn btn-success">Сохранить</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
 
 
+@section Scripts{
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				file: '',
+				url: '',
+				musics: [],
+				dbMusic:[]
+			},
+			 mounted() {
+				this.loadMusics();
+			},
+
+			methods: {
+				loadMusics: function () {
+					axios
+						.get('/Home/GetMusic')
+						.then(response => {
+							this.dbMusic = response.data;
+						});
+				},
+				saveFiles: function () {
+					var form = document.getElementById('form');
+					form.submit();
+				},
+
+				clickFile: function (index) {
+					var inp = document.getElementById(index);
+					inp.click();
+				},
+				addMusic() {
+					this.musics.push({ name: 'download' });
+				},
+				selectFile(event) {
+					this.file = event.target.files[0];
+					this.url = URL.createObjectURL(this.file);
+					document.getElementById("myMusic").load();
+
+					var txt = document.getElementById('t' + event.target.id);
+					txt.value = event.target.files[0].name;
+
+				}
+			}
+		});
+	</script>
+}

@@ -7,7 +7,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Gloria+Hallelujah|Marck+Script|Nothing+You+Could+Do|Caveat|Satisfy&display=swap" rel="stylesheet">
-  
+    <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
+
+    <style>
+		@@font-face {
+			font-family: 'vivaldi';
+			src: url('/font/vivaldi.ttf') format('truetype');
+		}
+		@@font-face {
+			font-family: 'castellar';
+			src: url('/font/castellar.ttf') format('truetype');
+		}
+    </style>
+
     <style>
         .side {
             background-color: white;
@@ -85,7 +97,7 @@
                 <div class="col-sm-1 side"></div>
             </div>
         </header>
-        <div class="fon">
+        <div >
             <div class="row">
 
                 <div class=" col-sm-1 side"></div>
@@ -125,27 +137,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                File: '',
-                url: '',
-                musics: []
-            },
-            methods: {
-                addMusic() {
-                    this.musics.push(1);
-                },
-                selectFile(event) {
-                    this.selectFile = event.target.files[0];
-                    this.url = URL.createObjectURL(this.selectFile);
-                    document.getElementById("myMusic").load();
-
-                }
-            }
-        });
-    </script>
+   
 
     @RenderSection("Scripts", required: false)
 </body>

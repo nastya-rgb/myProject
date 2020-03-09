@@ -13,5 +13,6 @@ namespace Flowers_Shop.Models
 
         public string Genre { get; set; }
         public string FilePath { get; set; }
+
     }
 }

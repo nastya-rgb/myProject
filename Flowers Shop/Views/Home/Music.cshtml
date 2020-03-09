@@ -1,12 +1,58 @@
-﻿<div id="app">
-    <button v-on:click="addMusic();">Добавить музыку</button>
-    <div id="form">
-        <div v-for="m in musics">
-            <input type="file" v-on:change="selectFile/" />
-            <audio id="myMusic" controls>
-                <source v-bind:src="url" type="audio/mp3" />
-            </audio>
-        </div>
+﻿<link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
+<style>
+    .btsty{
+        color:black;
+        border:none;
+        background-color:white;
+        margin-top:50px
 
+    }
+        .btsty:hover {
+           background: linear-gradient(45deg,gray  ,white) ;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.5s;
+            border-radius: 11px
+        }
+
+</style>
+
+<button class="btsty" data-toggle="modal" data-target="#myModal">
+    <i class="fas fa-feather-alt"> </i> Добавить музыку
+</button>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Добавить еще</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="app">
+                    <button v-on:click="addMusic() ;"><i class="fas fa-plus"></i></button>
+                    <div id="form">
+                        <div v-for="m in musics">
+                            <input type="file" v-on:change="selectFile" />
+                            <audio id="myMusic" controls>
+                                <source v-bind:src="url" type="audio/mp3" />
+                            </audio>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
     </div>
 </div>
+
+

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Flowers_Shop.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flowers_Shop.Controllers
 {
@@ -40,6 +41,8 @@ namespace Flowers_Shop.Controllers
         {
             return View();
         }
+
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

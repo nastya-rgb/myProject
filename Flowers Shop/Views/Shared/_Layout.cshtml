@@ -6,7 +6,8 @@
     <title>@ViewData["Title"] - Flowers_Shop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Gloria+Hallelujah|Marck+Script|Nothing+You+Could+Do|Caveat|Satisfy&display=swap" rel="stylesheet">
+  
     <style>
         .side {
             background-color: white;
@@ -14,24 +15,25 @@
 
         .htext {
             font-family: Castellar;
-            text-shadow:6px 5px 6px black;
+            text-shadow: 6px 5px 6px black;
             margin-top: 10px;
             font-size: 60px
         }
 
-        
+
 
         a {
             text-decoration: none;
             font-family: Castellar;
             color: black;
-            text-align: center
+            text-align: center;
+            font-size: 22px;
         }
 
             a:hover {
                 text-decoration-line: none;
                 text-shadow: 1px 3px 3px gray;
-                color: gray
+                color: dimgray
             }
 
         .mainfo {
@@ -47,8 +49,7 @@
             background-image: url('newfolder/1ss.png');
             background-size: auto;
             background-repeat: no-repeat;
-            background-position:top;
-            
+            background-position: top;
         }
 
         span {
@@ -58,8 +59,7 @@
         .fl {
             width: 160px;
             padding-top: 30px;
-        
-        
+        }
     </style>
 </head>
 
@@ -91,9 +91,9 @@
                 <div class=" col-sm-1 side"></div>
                 <div class="col-sm-10 mainbo">
                     <hr style="box-shadow: 3px 3px 3px gray">
-                    <a style="margin-right:10px" href="@Url.Action("Muse", "Home")">muse</a>
-                    <a style="margin-right: 10px" href="@Url.Action("Index", "Home")">my story</a>
-                    <a href="/Home/Music">music</a>
+                    <a  style="margin-right:10px" href="@Url.Action("Muse", "Home")">muse</a>
+                    <a  style="margin-right: 10px" href="@Url.Action("Index", "Home")">my story</a>
+                    <a  href="/Home/Music">music</a>
 
                     <div>
                         @RenderBody()
@@ -129,7 +129,7 @@
         var app = new Vue({
             el: '#app',
             data: {
-                selectFile: '',
+                File: '',
                 url: '',
                 musics: []
             },
